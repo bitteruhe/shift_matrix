@@ -1,0 +1,37 @@
+#######################################
+# Syntax Coloring Map
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+Matrix	KEYWORD1
+Binary64	KEYWORD1
+Pattern	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+multiplex	KEYWORD2
+clearAll	KEYWORD2
+tick	KEYWORD2
+setPace	KEYWORD2
+setInverted	KEYWORD2
+
+resetPattern	KEYWORD2
+quadPat	KEYWORD2
+circlePat	KEYWORD2
+snakePat	KEYWORD2
+barsPat	KEYWORD2
+randomPat	KEYWORD2
+binaryPat	KEYWORD2
+
+inc	KEYWORD2
+dec	KEYWORD2
+
+######################################
+# Constants (LITERAL1)
+#######################################
+
+#bla	LITERAL1
