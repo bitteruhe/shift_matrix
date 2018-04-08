@@ -25,13 +25,11 @@ Binary64::Binary64(String data[] = NULL, boolean startAtMax = false){
   This one will be replaced by 1 and the function stops.
 */
 String * Binary64::inc(){
-  boolean done = false;
-  for( byte b = 0; b < 8 && !done; b++){
+  for( byte b = 0; b < 8; b++){
       for( byte c = 0; c < 8; c++){
         if(_pat[b].charAt(c) == '0'){
           _pat[b].setCharAt(c, '1');
-          done = true;
-          break;
+          return _pat;
         } else {
           _pat[b].setCharAt(c, '0');
         }
@@ -45,16 +43,14 @@ String * Binary64::inc(){
 
 */
 String * Binary64::dec(){
-  boolean done = false;
-  for( byte b = 0; b < 8 && !done; b++){
+  for( byte b = 0; b < 8; b++){
       for( byte c = 0; c < 8; c++){
         if(_pat[b].charAt(c) == '0'){
           _pat[b].setCharAt(c, '1');
 
         } else {
           _pat[b].setCharAt(c, '0');
-          done = true;
-          break;
+          return _pat;
         }
       }
     }
