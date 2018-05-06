@@ -26,6 +26,7 @@ snakePat	KEYWORD2
 barsPat	KEYWORD2
 randomPat	KEYWORD2
 binaryPat	KEYWORD2
+doubleDecPat    KEYWORD2
 
 inc	KEYWORD2
 dec	KEYWORD2

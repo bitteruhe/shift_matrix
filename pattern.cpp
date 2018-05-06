@@ -11,6 +11,7 @@
 */
 Pattern::Pattern()
 {
+  
   _pat = new String[8];
   for(byte i = 0; i< 8;i++){
     _pat[i] = "00000000";
@@ -18,6 +19,7 @@ Pattern::Pattern()
 }
 
 void Pattern::resetPattern(){
+	free(_pat);
   _pat = new String[8];
   for(byte i = 0; i< 8;i++){
     _pat[i] = "00000000";
@@ -161,4 +163,119 @@ String* Pattern::randomPat(float percentage){
       }
     }
   return _pat;
+}
+
+
+String* Pattern::doubleDecPat(int number){
+	// -
+	if (number < 0) {
+		number = 0 - number;
+		_pat[7].setCharAt(2, '1');
+	}
+	else {
+		_pat[7].setCharAt(2, '0');
+	}
+	// first digit
+	if (number >= 0) {
+		doubleDecHelper((number / 10)%10);
+		for (byte i = 1; i<4; i++) {
+			for (byte j = 0; j<5; j++) {
+				_pat[7-i].setCharAt(j, _digit[j].charAt(i-1));
+			}
+		}
+	}
+	 //second digit
+	doubleDecHelper(number % 10);
+	for (byte i = 5; i<8; i++) {
+		for (byte j = 0; j<5; j++) {
+			_pat[7-i].setCharAt(j, _digit[j].charAt(i-5));
+		}
+	}
+	
+  return _pat;
+
+}
+void Pattern::doubleDecHelper(int number){
+	if (_digit == nullptr) {
+		_digit = new String[5];
+	}
+	switch (number) {
+	case 0:
+		_digit[0] = "111";
+		_digit[1] = "101";
+		_digit[2] = "101";
+		_digit[3] = "101";
+		_digit[4] = "111";
+		break;
+	case 1:
+		_digit[0] = "001";
+		_digit[1] = "011";
+		_digit[2] = "001";
+		_digit[3] = "001";
+		_digit[4] = "001";
+		break;
+	case 2:
+		_digit[0] = "111";
+		_digit[1] = "001";
+		_digit[2] = "111";
+		_digit[3] = "100";
+		_digit[4] = "111";
+		break;
+	case 3:
+		_digit[0] = "111";
+		_digit[1] = "001";
+		_digit[2] = "011";
+		_digit[3] = "001";
+		_digit[4] = "111";
+		break;
+	case 4:
+		_digit[0] = "100";
+		_digit[1] = "101";
+		_digit[2] = "111";
+		_digit[3] = "001";
+		_digit[4] = "001";
+		break;
+	case 5:
+		_digit[0] = "111";
+		_digit[1] = "100";
+		_digit[2] = "111";
+		_digit[3] = "001";
+		_digit[4] = "111";
+		break;
+	case 6:
+		_digit[0] = "111";
+		_digit[1] = "100";
+		_digit[2] = "111";
+		_digit[3] = "101";
+		_digit[4] = "111";
+		break;
+	case 7:
+		_digit[0] = "111";
+		_digit[1] = "001";
+		_digit[2] = "001";
+		_digit[3] = "001";
+		_digit[4] = "001";
+		break;
+	case 8:
+		_digit[0] = "111";
+		_digit[1] = "101";
+		_digit[2] = "111";
+		_digit[3] = "101";
+		_digit[4] = "111";
+		break;
+	case 9:
+		_digit[0] = "111";
+		_digit[1] = "101";
+		_digit[2] = "111";
+		_digit[3] = "001";
+		_digit[4] = "111";
+		break;
+	default:
+		_digit[0] = "000";
+		_digit[1] = "000";
+		_digit[2] = "000";
+		_digit[3] = "000";
+		_digit[4] = "000";
+		break;
+	}
 }

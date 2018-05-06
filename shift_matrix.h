@@ -46,13 +46,16 @@ class Pattern
     String* barsPat(float percentage);
     String* randomPat(float percentage);
     String* binaryPat(unsigned int number);
+    String* doubleDecPat(int number);
   private:
     String* _pat;
+	String* _digit;
     char quadHelper(float x, float y, float percentage);
     char circleHelper(float x, float y, float percentage);
     char snakeHelper(float x, float y, float percentage);
     char barsHelper(float x, float y, float percentage);
     char binaryHelper(float x, float y, unsigned int number);
+    void doubleDecHelper(int number);
 };
 
 /*
