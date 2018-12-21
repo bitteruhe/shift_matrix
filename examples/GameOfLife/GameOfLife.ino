@@ -16,6 +16,7 @@ Matrix matrix(9,10,11);
 String* pat;
 String* start_pat;
 String* new_pat;
+String* old_pat;
 
 int interval = 0;
 
@@ -29,9 +30,11 @@ void setup() {
   pat = new String[8];
   start_pat = new String[8];
   new_pat = new String[8];
+  old_pat = new String[8];
   for(byte b = 0;b<8;b++){
     pat[b] = "00000000";
-    new_pat[b] = "00000000";
+    new_pat[b] = "11111111";
+    old_pat[b] = "11111111";
   }
 
   // Some setup script for getting a starting patern from the user
@@ -54,8 +57,8 @@ void setup() {
 
 void loop() {
   int pace = (int)(1.0*analogRead(inputPin)/10);
-  if(interval >=pace)
-    if(gameOfLife()){
+  if(interval >=pace){
+    if(gameOfLife() || isSame()){
       Serial.println("No cells are left. Enter 'YES' if you want to replay.");
       while(Serial.available() < 3){}
       String answer = Serial.readString();
@@ -66,7 +69,7 @@ void loop() {
         }
       }
     }
-
+  }
   interval = ++interval % pace+1;
   // Write the current pattern to the matrix object
   matrix.multiplex(pat);
@@ -77,6 +80,11 @@ void loop() {
 
 
 boolean gameOfLife(){
+  for(byte i = 0;i<8;i++){
+    for(byte j = 0;j<8;j++){
+      old_pat[i].setCharAt(j, pat[i].charAt(j));
+    }
+  }
   boolean emp = true;
   for(byte i = 0;i<8;i++){
     for(byte j = 0;j<8;j++){
@@ -139,3 +147,16 @@ int getNeighbours(byte i, byte j){
   }
   return counter;
 }
+
+
+bool isSame(){
+  for(byte i = 0;i<8;i++){
+    for(byte j = 0;j<8;j++){
+      if(pat[i].charAt(j)!=old_pat[i].charAt(j)){
+        return false;
+      }
+    } 
+  }
+  return true;
+}
+
